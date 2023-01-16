@@ -2,58 +2,46 @@ import re
 import numpy as np
 import emoji
 
+def clean_tweet(text):  
+
+    pat1 = r'@[^ ]+'                   #@signs
+    pat2 = r'https?://[A-Za-z0-9./]+'  #links
+    pat3 = r'\'s'                      #floating s's
+    pat4 = r'\#\w+'                     # hashtags
+    pat5 = r'&amp '
+    pat6 = r'[^A-Za-z\s]'         #remove non-alphabet
+    combined_pat = r'|'.join((pat1, pat2,pat3,pat4,pat5, pat6))
+    text = re.sub(combined_pat,"",text).lower()
+    #remove extra spaces
+    text = re.sub(r'\s+',' ',text)
+    return text.strip()
+
+
+# translate emjois for text and check for multiple repeated emojis
 def translate_emoji(tweet):
     if tweet == None or tweet == "":
       tweet = tweet
     else:
-      tweet = emoji.demojize(tweet).replace(":", "").replace("_", " ")
+        # add space between words and emojis
+        tweet = re.sub(r'(\w+)([^\w\s])', r'\1 \2', tweet)
+        tweet = emoji.demojize(tweet).replace(":", "").replace("_", " ")
+      # check for multiple repeated words
+        tweet = re.sub(r'(\w+)( \1)+', r'\1', tweet)
     return tweet
 
 def remove_email(tweet):
     email = re.compile(r'[\w\.-]+@[\w\.-]+')
     return email.sub(r'',tweet)
      
-def clean_tweet(tweets):
-    cleaned_tweets = []
+def get_hashtags(tweets):
+
     hashtags = []
     for tweet in tweets:
-        
-        # Remove mentions
-        tweet = re.sub(r'@\w+', '', tweet)
-        
-        # Remove links
-        tweet = re.sub(r'http\S+', '', tweet)
-        tweet = re.sub(r'www\S+', '', tweet)
-        tweet = re.sub(r'bit.ly/\S+', '', tweet) # remove bitly links
-        tweet = tweet.strip('[link]') # remove [links]
-        
-        # Remove email address
-        tweet = remove_email(tweet)
-        
-        # Translate emojis
-        tweet = translate_emoji(tweet)
-        
-        # Capture hashtags
         hashtag_list = re.findall(r'#\w+', tweet)
         if len(hashtag_list) == 0:
             hashtag_list = []
-            
         hashtags.append(hashtag_list[1:])
-        
-        # Remove hashtags
-        tweet = re.findall(r"#(\w+)", tweet)
-        
-        # Remove &amp
-        tweet = re.sub(r'&amp ', '', tweet)
-        
-        # Remove special characters
-        tweet = re.sub('([_]+)', "", tweet)
-        
-        # remove any unnecessary spaces
-        tweet = " ".join(tweet.split())
-        
-        cleaned_tweets.append(tweet)
-    return cleaned_tweets, hashtags
+    return hashtags
 
 def create_bank_col(df):
     bank = df[1]
