@@ -1,2 +1,7 @@
 __pycache__
 .ipynb_checkpoints
+*.parquet
+Models
+Test_tweets
+Training_tweets
+*.~lock.*
