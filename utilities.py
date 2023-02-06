@@ -2,6 +2,12 @@ import re
 import numpy as np
 import emoji
 
+bank_dict = {'fnb': ['fnb', 'FNBSA', 'fnbSouthAfrica'],
+            'absa': ['absa', 'absaSA', 'ABSASouthAfrica'],
+            'nedbank': ['nedbank', 'NEDBANKSA', 'nedbankSouthAfrica'],
+            'capitec': ['capitec', 'CapitecBank', 'capitecSA'],
+            'standard_bank': ['standard bank','standardbank', 'StandardbankSA']}
+
 def clean_tweet(text):  
 
     pat1 = r'@[^ ]+'                   #@signs
@@ -10,11 +16,13 @@ def clean_tweet(text):
     pat4 = r'\#\w+'                     # hashtags
     pat5 = r'&amp '
     pat6 = r'[^A-Za-z\s]'         #remove non-alphabet
-    combined_pat = r'|'.join((pat1, pat2,pat3,pat4,pat5, pat6))
+    # remove patter rt
+    pat7 = r'(?<!\w)RT(?!\w)'
+    combined_pat = r'|'.join((pat1, pat2, pat3, pat4, pat5, pat6, pat7))
     text = re.sub(combined_pat,"",text).lower()
     #remove extra spaces
     text = re.sub(r'\s+',' ',text)
-    return text.strip()
+    return text.strip().lower()
 
 
 # translate emjois for text and check for multiple repeated emojis
@@ -33,26 +41,19 @@ def remove_email(tweet):
     email = re.compile(r'[\w\.-]+@[\w\.-]+')
     return email.sub(r'',tweet)
      
-def get_hashtags(tweets):
+def get_hashtags(tweet):
+    hashtags = re.findall(r'#\w+', tweet)
+    return [hashtag.replace('#', '') for hashtag in hashtags]
 
-    hashtags = []
-    for tweet in tweets:
-        hashtag_list = re.findall(r'#\w+', tweet)
-        if len(hashtag_list) == 0:
-            hashtag_list = []
-        hashtags.append(hashtag_list[1:])
-    return hashtags
+def get_banks(tweet, bank_dict=bank_dict):
+    banks = []
+    for bank, search_terms in bank_dict.items():
+        for term in search_terms:
+            if term.lower() in tweet.lower():
+                banks.append(bank)
+                break
+    return banks
 
-def create_bank_col(df):
-    bank = df[1]
-    if "fnb" in df[0].lower():
-        bank =  bank+"FNB;"
-    if "nedbank" in df[0].lower():
-        bank =  bank+"Nedbank;"
-    if "absa" in df[0].lower():
-        bank =  bank+"ABSA;"
-    if "standard" in df[0].lower():
-        bank =  bank+"Standard;"
-    if "capitec" in df[0].lower():
-        bank =  bank+"Capitec;"
-    return bank 
+def get_pred(model, tweet):
+    ouput = model.predict(tweet)
+    return ouput['label'] 

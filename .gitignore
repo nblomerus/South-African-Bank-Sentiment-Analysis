@@ -5,3 +5,13 @@ Models
 Test_tweets
 Training_tweets
 *.~lock.*
+Tweets
+*.parquet
+*.xlsx
+*.csv
+create_final_df.ipynb
+exp_add_multiple_bank_columns.ipynb
+exp_effects_emojis.ipynb
+twitter_sentiment_example.ipynb
+Benchmark
+Analysis_results
