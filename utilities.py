@@ -1,6 +1,8 @@
 import re
 import numpy as np
 import emoji
+import pandas as pd
+from tqdm import tqdm
 
 bank_dict = {'fnb': ['fnb', 'FNBSA', 'fnbSouthAfrica'],
             'absa': ['absa', 'absaSA', 'ABSASouthAfrica'],
@@ -43,7 +45,9 @@ def remove_email(tweet):
      
 def get_hashtags(tweet):
     hashtags = re.findall(r'#\w+', tweet)
-    return [hashtag.replace('#', '') for hashtag in hashtags]
+    # remove the # from the hashtag
+    [hashtag.replace('#', '') for hashtag in hashtags]
+    return ','.join(hashtags)
 
 def get_banks(tweet, bank_dict=bank_dict):
     banks = []
@@ -51,9 +55,59 @@ def get_banks(tweet, bank_dict=bank_dict):
         for term in search_terms:
             if term.lower() in tweet.lower():
                 banks.append(bank)
-                break
+                
     return banks
 
 def get_pred(model, tweet):
     ouput = model.predict(tweet)
     return ouput['label'] 
+
+def generate_df_hashtags(df):
+    # get hashtags from tweet
+    df_copy = df.copy()
+    # df_copy.head()
+    df_copy['Hashtags'] = df_copy['Tweet'].apply(get_hashtags)
+    # # remove '#' from hashtags
+    df_copy['Hashtags'] = df_copy['Hashtags'].str.replace('#', '')
+    # # remove duplicates from hashtags per tweet
+    df_copy['Hashtags'] = df_copy['Hashtags'].apply(lambda x: ','.join(set(x.split(','))))
+    df_copy['Hashtag_List'] = df_copy['Hashtags'].str.split(',')
+    df_hashtags = pd.DataFrame(df_copy['Hashtag_List'].tolist()).fillna('').add_prefix('hashtag_')
+
+    # reset index to match df_copy
+    df_copy.reset_index(inplace=True)
+    df_copy = df_copy.set_index('Tweet_Id')
+
+    df_hashtags = df_hashtags.set_index(df_copy.index)
+    # # add columns 'Bank' from df to df_hashtags
+    df_hashtags['Bank'] = df_copy['Bank']
+    df_hashtags.reset_index(inplace=True)
+    return df_hashtags
+
+def generate_df_tweet_words(df):
+    # get words from tweet
+    df_copy = df.copy()
+    df_copy['Tweet_Words'] = df_copy['Tweet'].str.split()
+    df_tweet_words = pd.DataFrame(df_copy['Tweet_Words'].tolist()).fillna('').add_prefix('word_')
+
+    # reset index to match df_copy
+    df_copy.reset_index(inplace=True)
+    df_copy = df_copy.set_index('Tweet_Id')
+
+    df_tweet_words = df_tweet_words.set_index(df_copy.index)
+    # # add columns 'Bank' from df to df_hashtags
+    df_tweet_words['Bank'] = df_copy['Bank']
+    df_tweet_words.reset_index(inplace=True)
+    df_tweet_words['Bank'] = df_tweet_words['Bank']
+    return df_tweet_words
+
+def split_dataframe_to_excel(df, folder, file_prefix, max_rows_per_file=1000):
+    # calculate the number of files to create
+    num_files = (len(df) - 1) // max_rows_per_file + 1
+    
+    # split the dataframe into multiple dataframes
+    dfs = [df.iloc[i*max_rows_per_file:(i+1)*max_rows_per_file, :] for i in range(num_files)]
+    
+    # write each dataframe to a separate Excel file
+    for i, df_chunk in tqdm(enumerate(dfs)):
+        df_chunk.to_excel(f'{folder}/{file_prefix}_{i+1}.xlsx', index=False)
