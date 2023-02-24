@@ -19,7 +19,7 @@ Tweet author
 Number of retweets
 Number of likes
 
-All data sources have been upload to Kaggle follow the link for the datasets. Data has been stored in both parquet and excel file formats. You can use the df_to_excel notebook to convert the parquet files to excel sheets.
+All data sources have been upload to Kaggle [here](https://www.kaggle.com/datasets/nicholasblomerus/twitter-analysis-of-popular-south-african-banks). Data has been stored in both parquet and excel file formats. You can use the df_to_excel notebook to convert the parquet files to excel sheets.
 
 Note: The data collected may contain inaccuracies or unrepresentative samples, as it is based on public tweets and may not accurately reflect the overall sentiment towards the banks.
 # NLP models
