@@ -42,5 +42,7 @@ Disclaimer: These models may not always produce accurate results, as the models 
 # Tableau Story
 The results of the data analysis were visualized using Tableau to create an interactive story. The story includes various visualizations, including line charts, scatterplots, bar charts, and word clouds, to provide insights into the online presence and engagement of South Africa's top banks on Twitter.
 
+Due to the large number of tweets it was not possilbe to publish this workbook to Tableau Public. If you would like workbook please feel free to contact me on LinkedIn. I hope whom every sees this Tableau story gains some insight.
+
 https://user-images.githubusercontent.com/98228593/221222657-9516e0bd-bc0b-4f6c-9750-6121c2405748.mp4
 
