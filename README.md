@@ -1,4 +1,4 @@
-# South-African-Bank-Sentiment-Analysis
+# Twitter Analysis of Popular South African Banks
 # Overview
 This is project is aimed at analyzing public opinion towards various South African banks. The project uses natural language processing techniques to process large amounts of data. The analysis will provide insights into customer satisfaction, areas of improvement and general public perception of the banks. The results of this project can be useful for the banks to improve their services and reputation in the South African market.
 # Dataset
