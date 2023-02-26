@@ -42,7 +42,27 @@ Disclaimer: These models may not always produce accurate results, as the models 
 # Tableau Story
 The results of the data analysis were visualized using Tableau to create an interactive story. The story includes various visualizations, including line charts, scatterplots, bar charts, and word clouds, to provide insights into the online presence and engagement of South Africa's top banks on Twitter.
 
-Due to the large number of tweets it was not possilbe to publish this workbook to Tableau Public. If you would like workbook please feel free to contact me on LinkedIn. I hope whom every sees this Tableau story gains some insight.
+## Twitter Statistics
+https://user-images.github<img width="698" alt="dashboard1" src="https://user-images.githubusercontent.com/98228593/221432930-e81bf1c3-21f3-4484-84a2-eebd9cfeacbe.png">
 
-https://user-images.githubusercontent.com/98228593/221222657-9516e0bd-bc0b-4f6c-9750-6121c2405748.mp4
+## Best times to Tweet
+<img width="695" alt="dashboard2" src="https://user-images.githubusercontent.com/98228593/221432946-8a9e5d0d-c426-4708-a5d1-4125bf50d4be.png">
+
+## Sentiment Analysis
+<img width="700" alt="dashboard3" src="https://user-images.githubusercontent.com/98228593/221432961-a8bba6fd-f74c-47f2-a8ad-3f4cbda17196.png">
+
+## Effects of Sport
+<img width="694" alt="dashboard4" src="https://user-images.githubusercontent.com/98228593/221433009-0b581214-1489-468a-828e-05c3c740e3eb.png">
+
+## Hashtag Analysis 
+<img width="686" alt="dashboard6" src="https://user-images.githubusercontent.com/98228593/221433027-b3cc7bfb-e628-4c8d-b443-b1873c863f75.png">
+
+## Top Tweets
+<img width="703" alt="dashboard7" src="https://user-images.githubusercontent.com/98228593/221433034-07fa4345-7500-447d-9b89-78e7d4085fdd.png">
+
+Due to the large number  of tweets it was not possilbe to publish this workbook to Tableau Public. If you would like workbook please feel free to contact me on LinkedIn. I hope whom every sees this Tableau story gains some insight.
+
+
+usercontent.com/98228593/221222657-9516e0bd-bc0b-4f6c-9750-6121c2405748.mp4
+
 
