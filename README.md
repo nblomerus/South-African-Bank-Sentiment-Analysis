@@ -40,10 +40,14 @@ The topic detection model identifies the main topics discussed in the tweets. Th
 Disclaimer: These models may not always produce accurate results, as the models are based on pre-existing training data and may not generalize well to the specific domain of South African bank sentiment analysis.
 
 # Tableau Story
-The results of the data analysis were visualized using Tableau to create an interactive story. The story includes various visualizations, including line charts, scatterplots, bar charts, and word clouds, to provide insights into the online presence and engagement of South Africa's top banks on Twitter.
+The results of the data analysis were visualized using Tableau to create an interactive story. The story includes various visualizations, including line charts, scatterplots, bar charts, and word clouds, to provide insights into the online presence and engagement of South Africa's top banks on Twitter. Due to the large number  of tweets it was not possilbe to publish this workbook to Tableau Public. If you would like workbook please feel free to contact me on LinkedIn. In addition to a video of the Tableau dashboards I've also added individual images of each dashboard.
+
+
+https://user-images.githubusercontent.com/98228593/221433110-0d9473e4-ec77-45b5-9de9-53ece7aa8f6b.mp4
+
 
 ## Twitter Statistics
-https://user-images.github<img width="698" alt="dashboard1" src="https://user-images.githubusercontent.com/98228593/221432930-e81bf1c3-21f3-4484-84a2-eebd9cfeacbe.png">
+<img width="698" alt="dashboard1" src="https://user-images.githubusercontent.com/98228593/221432930-e81bf1c3-21f3-4484-84a2-eebd9cfeacbe.png">
 
 ## Best times to Tweet
 <img width="695" alt="dashboard2" src="https://user-images.githubusercontent.com/98228593/221432946-8a9e5d0d-c426-4708-a5d1-4125bf50d4be.png">
@@ -60,9 +64,8 @@ https://user-images.github<img width="698" alt="dashboard1" src="https://user-im
 ## Top Tweets
 <img width="703" alt="dashboard7" src="https://user-images.githubusercontent.com/98228593/221433034-07fa4345-7500-447d-9b89-78e7d4085fdd.png">
 
-Due to the large number  of tweets it was not possilbe to publish this workbook to Tableau Public. If you would like workbook please feel free to contact me on LinkedIn. I hope whom every sees this Tableau story gains some insight.
+ I hope whom every sees this Tableau story gains some insight.
 
 
-usercontent.com/98228593/221222657-9516e0bd-bc0b-4f6c-9750-6121c2405748.mp4
 
 
